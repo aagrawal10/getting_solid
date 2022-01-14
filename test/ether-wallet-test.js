@@ -1,4 +1,4 @@
-const { expect, assert } = require("chai");
+const { expect } = require("chai");
 const { ethers } = require("hardhat");
 
 describe("EtherWallet", function () {
@@ -22,6 +22,9 @@ describe("EtherWallet", function () {
         const currentBalance = await etherWallet.getBalance();
         console.log(`Balance: ${currentBalance}`);
         expect(currentBalance).to.equal(ethers.utils.parseEther("1.0"));
+
+        // Verify that the ethers getBalance also returns the same.
+        expect(await (await ethers.provider.getBalance(etherWallet.address))).to.equal(ethers.utils.parseEther("1.0"));
 
         // Withdraw from the contract
         const withdrawTx = await etherWallet.withdraw(ethers.utils.parseEther("0.5"));
