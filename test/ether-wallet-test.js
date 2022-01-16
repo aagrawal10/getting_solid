@@ -20,7 +20,6 @@ describe("EtherWallet", function () {
 
         // Verify that the balance is now 1 ETH
         const currentBalance = await etherWallet.getBalance();
-        console.log(`Balance: ${currentBalance}`);
         expect(currentBalance).to.equal(ethers.utils.parseEther("1.0"));
 
         // Verify that the ethers getBalance also returns the same.

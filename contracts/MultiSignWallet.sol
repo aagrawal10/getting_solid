@@ -1,6 +1,9 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
+// Note: Once transactions have been executed, data can be cleared freeing up storage slots.
+// bytes data is perhaps takes up the most storage, which can be freed.
+// This is not implemented currently in the contract but can be an improvement to free up some storage.
 contract MultiSigWallet {
     // Events
     event Deposit(address indexed sender, uint amount, uint balance);
@@ -29,11 +32,11 @@ contract MultiSigWallet {
     mapping(uint => mapping(address => bool)) confirmedByOwner;
 
     struct Transaction {
-        address to;
         uint value;
-        bytes data;
-        bool executed;
         uint numConfirmations;
+        bool executed;
+        address to;
+        bytes data;
     }
 
     Transaction[] transactions;
